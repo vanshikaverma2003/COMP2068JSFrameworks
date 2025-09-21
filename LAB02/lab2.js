@@ -25,3 +25,5 @@ prompt.get(['userSelection'], function (err, result) {
         computerSelection = 'ROCK';
     }
 
+console.log(`User selected: ${userSelection}`);
+    console.log(`Computer selected: ${computerSelection}`);
