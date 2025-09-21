@@ -12,3 +12,16 @@ prompt.get(['userSelection'], function (err, result) {
     }
 
     const userSelection = result.userSelection.toUpperCase();
+
+       // Generate computer selection
+    const randomNum = Math.random();
+    let computerSelection = '';
+
+    if (randomNum <= 0.34) {
+        computerSelection = 'PAPER';
+    } else if (randomNum <= 0.67) {
+        computerSelection = 'SCISSORS';
+    } else {
+        computerSelection = 'ROCK';
+    }
+
