@@ -1,0 +1,182 @@
+/* CSS Variables: Light/Dark Mode (smooth transitions) */
+:root {
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --navbar-bg: #f8f9fa;
+    --footer-bg: #343a40;
+    --card-bg: #ffffff;
+}
+
+.dark-mode {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --navbar-bg: #1e1e1e;
+    --footer-bg: #0d1117;
+    --card-bg: #1e1e1e;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+}
+
+/* Navbar Menu Animations (Hover lift + glow - Great Functions) */
+.navbar {
+    background-color: var(--navbar-bg) !important;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.navbar-nav .nav-link {
+    transition: all 0.3s ease;
+    font-weight: 500;
+    margin: 0 10px;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #007bff !important;
+    transform: translateY(-2px);
+    text-shadow: 0 0 5px rgba(0,123,255,0.5);
+}
+
+/* Page Animations (Animate.css + Custom Scroll Reveal) */
+.animate-on-load {
+    opacity: 0;
+    animation: animate__fadeInUp 1s ease-in-out forwards;
+}
+
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Professional Design: Spacing, Colors, Typography, Graphics */
+main {
+    min-height: 80vh;
+}
+
+section {
+    padding: 60px 0;
+    margin: 20px 0;
+}
+
+h1, h2 {
+    color: var(--text-color);
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 3rem;
+    color: #007bff;
+}
+
+.card {
+    background-color: var(--card-bg);
+    border: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.card-text {
+    color: var(--text-color);
+}
+
+.img-fluid {
+    border-radius: 50%;
+    border: 3px solid #007bff;
+    transition: border-color 0.3s ease;
+}
+
+.img-fluid:hover {
+    border-color: #0056b3;
+}
+
+/* Contact Form Styling (Professional, Responsive) */
+.contact-form {
+    max-width: 500px;
+    margin: 0 auto;
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    color: var(--text-color);
+}
+
+.form-control {
+    background-color: var(--bg-color);
+    border: 1px solid #ddd;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* Footer */
+footer {
+    background-color: var(--footer-bg) !important;
+    transition: background-color 0.3s ease;
+}
+
+footer a {
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #007bff !important;
+}
+
+/* Lists and Blockquotes */
+ul.list-unstyled li {
+    margin-bottom: 10px;
+    padding: 5px 0;
+}
+
+.blockquote {
+    border-left: 4px solid #007bff;
+    padding-left: 20px;
+    font-style: italic;
+}
+
+/* Responsive (Mobile-Friendly Menu/Spacing) */
+@media (max-width: 768px) {
+    h1 { font-size: 2rem; }
+    section { padding: 40px 0; }
+    .navbar-nav { text-align: center; }
+    .contact-form { padding: 20px; }
+    .img-fluid { max-width: 200px; }
+}
