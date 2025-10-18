@@ -1,3 +1,7 @@
+// LAB03 - Simple Math Server using Connect
+// Author: [Your Name]
+// Course: COMP2068 - Web Programming
+// Lab: 03
 
 const connect = require('connect');
 const url = require('url');
@@ -19,3 +23,44 @@ function calculate(req, res) {
     );
     return;
   }
+
+  let result;
+  let symbol;
+
+  // Select math operation
+  switch (method) {
+    case 'add':
+      result = x + y;
+      symbol = '+';
+      break;
+    case 'subtract':
+      result = x - y;
+      symbol = '-';
+      break;
+    case 'multiply':
+      result = x * y;
+      symbol = '*';
+      break;
+    case 'divide':
+      if (y === 0) {
+        res.end('Error: Cannot divide by zero.');
+        return;
+      }
+      result = x / y;
+      symbol = '/';
+      break;
+    default:
+      res.end('Error: Invalid method. Use add, subtract, multiply, or divide.');
+      return;
+  }
+
+  res.end(`${x} ${symbol} ${y} = ${result}`);
+}
+
+// Route setup
+app.use('/Lab03', calculate);
+
+// Start the server
+app.listen(3000, () => {
+  console.log('✅ Server running at http://localhost:3000/Lab03');
+});
