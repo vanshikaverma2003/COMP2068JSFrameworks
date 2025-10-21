@@ -1,5 +1,5 @@
 // LAB03 - Simple Math Server using Connect
-// Author: [Your Name]
+// Author:Vanshika
 // Course: COMP2068 - Web Programming
 // Lab: 03
 
@@ -19,7 +19,7 @@ function calculate(req, res) {
   // Check if parameters are valid
   if (!method || isNaN(x) || isNaN(y)) {
     res.end(
-      'Error: Please provide valid parameters.\nExample: http://localhost:3000/lab3?method=add&x=10&y=5'
+      'Error: Please provide valid parameters.\nExample: http://localhost:3000/Lab03?method=add&a=16&b=4'
     );
     return;
   }
