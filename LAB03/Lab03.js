@@ -11,8 +11,8 @@ const app = connect();
 function calculate(req, res) {
   const query = url.parse(req.url, true).query;
   const method = query.method;
-  const x = parseFloat(query.x);
-  const y = parseFloat(query.y);
+  const x = parseFloat(query.a);
+  const y = parseFloat(query.b);
 
   res.writeHead(200, { 'Content-Type': 'text/plain' });
 
