@@ -16,6 +16,7 @@ export class ProjectService {
     return this.http.get('http://localhost:3000/api/projects');
   }
 
+
   // Method to create a new project
   addProject(newProject: any) {
     // Make a POST request to the backend to create a new project and send the new project data

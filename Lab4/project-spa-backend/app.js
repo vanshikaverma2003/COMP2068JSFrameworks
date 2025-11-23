@@ -5,7 +5,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-// DELETE THIS ONCE USERS ROUTER IS REMOVED
 var usersRouter = require('./routes/users');
 
 var app = express();
@@ -13,13 +12,10 @@ var app = express();
 // ✅ Load environment variables
 require('dotenv').config();
 
-// ✅ Connect to MongoDB
+// ✅ Connect to MongoDB (FIXED - removed deprecated options)
 const mongoose = require("mongoose");
 
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
+mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log("✅ MongoDB Connected Successfully"))
 .catch(err => console.error("❌ MongoDB Connection Error:", err));
 

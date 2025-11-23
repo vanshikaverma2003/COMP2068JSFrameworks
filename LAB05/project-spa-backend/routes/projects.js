@@ -32,4 +32,18 @@ router.delete("/:_id", async (req, res, next) => {
   res.status(200).json(project);
 });
 
+router.post('/', (req,res,next) => {
+//how is the client sending the project object
+Project.create(req.body, (err, project) => {
+
+    if(err) {
+      return res.status(500).json(err);
+    }
+    else {
+      return res.status(201).json(project);
+    }
+    });
+});
+
+
 module.exports = router;

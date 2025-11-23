@@ -25,46 +25,18 @@
   </tbody>
 </table>
 
-<!-- Form for Create/Update -->
-<form style="max-width: 500px">
-  <h2>Project Details</h2>
-  <fieldset class="form-group">
-    <label class="form-label" for="name">Name: </label>
-    <input
-      class="form-control"
-      id="name"
-      name="name"
-      required
-      [(ngModel)]="name"
-    />
+<form>
+  <fieldset class="from-group">
+    <label for="name" class="col-3">Name:</label>
+  <input name="name" id="name " [(ngMode1)]= "name" required />
   </fieldset>
-  <fieldset class="form-group">
-    <label class="form-label" for="dueDate">Due Date: </label>
-    <input
-      class="form-control"
-      id="dueDate"
-      name="dueDate"
-      required
-      [(ngModel)]="dueDate"
-    />
+  <fieldset class="from-group">
+    <label for="dueDate" class="col-3">Due Date:</label>
+  <input name="dueDate" id="dueDate" [(ngMode1)]="dueDate"  required />
   </fieldset>
-  <fieldset class="form-group">
-    <label class="form-label" for="course">Course: </label>
-    <input
-      class="form-control"
-      id="course"
-      name="course"
-      required
-      [(ngModel)]="course"
-    />
+  <fieldset class="from-group">
+    <label for="course" class="col-3">Course:</label>
+  <input name="course" id="course" [(ngMode1)]="course" required />
   </fieldset>
-  <hr />
-  <button class="btn btn-primary" (click)="addProject()" *ngIf="!this._id">
-    Save
-  </button>
-  <button class="btn btn-info" (click)="updateProject()" *ngIf="this._id">
-    Update
-  </button>
-  &nbsp;
-  <button class="btn btn-warning" (click)="clearForm()">Clear</button>
+<button class="btn btn-primary offset-3">Save Now</button>
 </form>
