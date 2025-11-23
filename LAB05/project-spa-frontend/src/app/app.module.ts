@@ -10,10 +10,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProjectService } from './services/project.service';
 // Import the FormsModule so we can bind input fields with component variables
 import { FormsModule } from '@angular/forms';
+
 @NgModule({
-  declarations:[
-    AppComponent,
-     ProjectComponent],
+  declarations: [AppComponent, ProjectComponent],
   imports: [
     // list of modules that are required by the app
     BrowserModule,
@@ -21,7 +20,10 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
   ],
-  providers: [ProjectService],
+  providers: [
+    // list of services that are required by the app
+    ProjectService,
+  ],
   bootstrap: [ProjectComponent],
 })
 export class AppModule {}
