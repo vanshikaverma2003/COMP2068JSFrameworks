@@ -1,0 +1,173 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <!-- Login Card -->
+            <div class="card shadow-lg border-0">
+                <!-- Card Header -->
+                <div class="card-header bg-success text-white text-center py-4">
+                    <h2 class="display-6 fw-bold mb-0">
+                        <i class="fas fa-sign-in-alt me-2"></i>Welcome Back
+                    </h2>
+                    <p class="mb-0 mt-2">Login to access your recipes and dashboard</p>
+                </div>
+                
+                <!-- Card Body -->
+                <div class="card-body p-4 p-md-5">
+                    <!-- GitHub Login Button -->
+                    <div class="text-center mb-4">
+                        <a href="/auth/github" class="btn btn-dark btn-lg w-100 py-3 mb-3">
+                            <i class="fab fa-github fa-lg me-3"></i>
+                            Continue with GitHub
+                        </a>
+                        <div class="divider d-flex align-items-center my-4">
+                            <p class="text-center mx-3 mb-0 text-muted">Or login with email</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Login Form -->
+                    <form action="/auth/login" method="POST">
+                        <!-- Email Input -->
+                        <div class="form-floating mb-3">
+                            <input type="email" 
+                                   class="form-control {{#if errors}}is-invalid{{/if}}" 
+                                   id="email" 
+                                   name="email"
+                                   placeholder="name@example.com"
+                                   value="{{email}}"
+                                   required>
+                            <label for="email">
+                                <i class="fas fa-envelope me-2"></i>Email Address
+                            </label>
+                            {{#if errors}}
+                            <div class="invalid-feedback">
+                                Invalid email or password
+                            </div>
+                            {{/if}}
+                        </div>
+                        
+                        <!-- Password Input -->
+                        <div class="form-floating mb-4">
+                            <input type="password" 
+                                   class="form-control {{#if errors}}is-invalid{{/if}}" 
+                                   id="password" 
+                                   name="password"
+                                   placeholder="Password"
+                                   required>
+                            <label for="password">
+                                <i class="fas fa-lock me-2"></i>Password
+                            </label>
+                            <div class="form-text text-end">
+                                <a href="#" class="text-decoration-none">Forgot password?</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Remember Me Checkbox -->
+                        <div class="form-check mb-4">
+                            <input class="form-check-input" type="checkbox" id="remember" name="remember">
+                            <label class="form-check-label" for="remember">
+                                Remember me
+                            </label>
+                        </div>
+                        
+                        <!-- Submit Button -->
+                        <div class="d-grid mb-4">
+                            <button type="submit" class="btn btn-success btn-lg py-3">
+                                <i class="fas fa-sign-in-alt me-2"></i>Login to Account
+                            </button>
+                        </div>
+                        
+                        <!-- Register Link -->
+                        <div class="text-center">
+                            <p class="text-muted mb-0">
+                                Don't have an account?
+                                <a href="/auth/register" class="text-success fw-bold text-decoration-none">
+                                    Create one now
+                                </a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Features Section -->
+            <div class="row mt-5 g-4">
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-book fa-2x text-success"></i>
+                        </div>
+                        <h6 class="fw-bold">Access Recipes</h6>
+                        <p class="text-muted small">View and manage all your recipes</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-plus-circle fa-2x text-success"></i>
+                        </div>
+                        <h6 class="fw-bold">Create New</h6>
+                        <p class="text-muted small">Add your own recipes to share</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-share-alt fa-2x text-success"></i>
+                        </div>
+                        <h6 class="fw-bold">Share with Community</h6>
+                        <p class="text-muted small">Share your creations with others</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Custom CSS for Login Page -->
+<style>
+    .card {
+        border-radius: 15px;
+        overflow: hidden;
+    }
+    
+    .card-header {
+        border-bottom: none;
+    }
+    
+    .form-floating > .form-control:focus ~ label,
+    .form-floating > .form-control:not(:placeholder-shown) ~ label {
+        color: #28a745;
+    }
+    
+    .divider {
+        color: #6c757d;
+    }
+    
+    .divider::before,
+    .divider::after {
+        content: "";
+        flex: 1;
+        border-bottom: 1px solid #dee2e6;
+    }
+    
+    .feature-icon {
+        width: 60px;
+        height: 60px;
+        background-color: rgba(40, 167, 69, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+    }
+    
+    .btn-dark {
+        background-color: #333;
+        border-color: #333;
+    }
+    
+    .btn-dark:hover {
+        background-color: #222;
+        border-color: #222;
+    }
+</style>

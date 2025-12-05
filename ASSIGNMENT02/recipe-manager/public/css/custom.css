@@ -1,0 +1,435 @@
+/* Custom Styles for Recipe Manager */
+
+/* Custom Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Animation Classes */
+.fade-in {
+    animation: fadeIn 0.6s ease-out;
+}
+
+.slide-in {
+    animation: slideIn 0.5s ease-out;
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+}
+
+/* Recipe Cards Enhancements */
+.recipe-card {
+    position: relative;
+    overflow: hidden;
+    border: none !important;
+}
+
+.recipe-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.recipe-card:hover::before {
+    transform: scaleX(1);
+}
+
+.recipe-card .card-img-top {
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.recipe-card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+/* Ingredient and Instruction Lists */
+.ingredient-list li {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.ingredient-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.instruction-list li {
+    counter-increment: step-counter;
+    margin-bottom: 1rem;
+    padding-left: 3rem;
+    position: relative;
+}
+
+.instruction-list li::before {
+    content: counter(step-counter);
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: var(--primary-color);
+    color: white;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* Cooking Time Display */
+.cooking-time-display {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    border-radius: 50px;
+    font-weight: 500;
+}
+
+.cooking-time-display i {
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+}
+
+/* Difficulty Badges */
+.difficulty-badge {
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+}
+
+.difficulty-easy {
+    background: linear-gradient(135deg, #d4edda, #c3e6cb);
+    color: #155724;
+}
+
+.difficulty-medium {
+    background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+    color: #856404;
+}
+
+.difficulty-hard {
+    background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+    color: #721c24;
+}
+
+/* Category Tags */
+.category-tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: rgba(40, 167, 69, 0.1);
+    color: var(--primary-color);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.category-tag:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Search Box Enhancement */
+.search-box {
+    position: relative;
+}
+
+.search-box input {
+    padding-left: 3rem;
+    border-radius: 50px !important;
+    border: 2px solid transparent;
+    background: rgba(40, 167, 69, 0.05);
+}
+
+.search-box input:focus {
+    border-color: var(--primary-color);
+    background: white;
+    box-shadow: 0 0 0 0.25rem rgba(40, 167, 69, 0.1);
+}
+
+.search-box .search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--secondary-color);
+    z-index: 10;
+}
+
+/* User Avatar Effects */
+.user-avatar {
+    border: 3px solid transparent;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, var(--primary-color), var(--primary-light)) border-box;
+    transition: transform 0.3s ease;
+}
+
+.user-avatar:hover {
+    transform: scale(1.1);
+}
+
+/* Loading Spinner */
+.loading-spinner {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(40, 167, 69, 0.2);
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Empty State Styling */
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+    background: rgba(40, 167, 69, 0.05);
+    border-radius: var(--border-radius-lg);
+    border: 2px dashed rgba(40, 167, 69, 0.3);
+}
+
+.empty-state i {
+    font-size: 4rem;
+    color: rgba(40, 167, 69, 0.3);
+    margin-bottom: 1rem;
+}
+
+/* Recipe Stats */
+.recipe-stats {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background: rgba(40, 167, 69, 0.1);
+    border-radius: var(--border-radius-md);
+    color: var(--dark-color);
+}
+
+.stat-item i {
+    margin-right: 0.5rem;
+    color: var(--primary-color);
+}
+
+/* Form Styling Enhancements */
+.form-floating > label {
+    color: var(--secondary-color);
+}
+
+.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:not(:placeholder-shown) ~ label {
+    color: var(--primary-color);
+}
+
+/* Breadcrumb Enhancement */
+.breadcrumb {
+    background: transparent;
+    padding: 0;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: '›';
+    color: var(--secondary-color);
+}
+
+.breadcrumb-item.active {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+/* Alert Enhancements */
+.alert {
+    border-left: 4px solid;
+}
+
+.alert-success {
+    border-left-color: var(--primary-color);
+}
+
+.alert-danger {
+    border-left-color: var(--danger-color);
+}
+
+.alert-info {
+    border-left-color: var(--info-color);
+}
+
+/* Pagination Customization */
+.pagination .page-link {
+    color: var(--primary-color);
+    border: none;
+    margin: 0 0.25rem;
+    border-radius: var(--border-radius-md);
+}
+
+.pagination .page-link:hover {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: var(--primary-dark);
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Table Row Hover Effect */
+.table-hover tbody tr {
+    transition: all 0.3s ease;
+}
+
+.table-hover tbody tr:hover {
+    background: rgba(40, 167, 69, 0.05);
+    transform: translateX(5px);
+}
+
+/* Card Hover Effects for Dashboard */
+.dashboard-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.dashboard-card:hover::after {
+    transform: scaleX(1);
+}
+
+/* Print Recipe Styling */
+@media print {
+    .recipe-print {
+        break-inside: avoid;
+    }
+    
+    .recipe-title-print {
+        color: #000 !important;
+        font-size: 24pt !important;
+    }
+    
+    .no-print {
+        display: none !important;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #1a1a1a;
+        color: #e0e0e0;
+    }
+    
+    .card {
+        background-color: #2d2d2d;
+        color: #e0e0e0;
+    }
+    
+    .text-muted {
+        color: #a0a0a0 !important;
+    }
+}
+
+/* Accessibility Focus Styles */
+:focus {
+    outline: 3px solid rgba(40, 167, 69, 0.5);
+    outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+:focus-visible {
+    outline: 3px solid rgba(40, 167, 69, 0.5);
+    outline-offset: 2px;
+}

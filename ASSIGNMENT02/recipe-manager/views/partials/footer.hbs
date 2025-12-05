@@ -1,0 +1,81 @@
+<footer class="bg-dark text-white py-5 mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <h5 class="fw-bold mb-3">
+                    <i class="fas fa-utensils me-2"></i>Recipe Manager
+                </h5>
+                <p class="text-light">Share, discover, and manage your favorite recipes with our community of food lovers.</p>
+                <div class="social-icons mt-3">
+                    <a href="#" class="text-white me-3"><i class="fab fa-facebook fa-lg"></i></a>
+                    <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                    <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
+                    <a href="#" class="text-white"><i class="fab fa-github fa-lg"></i></a>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <h5 class="fw-bold mb-3">Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="/" class="text-light text-decoration-none"><i class="fas fa-chevron-right me-2"></i>Home</a></li>
+                    <li class="mb-2"><a href="/recipes/public" class="text-light text-decoration-none"><i class="fas fa-chevron-right me-2"></i>Browse Recipes</a></li>
+                    {{#if user}}
+                    <li class="mb-2"><a href="/recipes/dashboard" class="text-light text-decoration-none"><i class="fas fa-chevron-right me-2"></i>Dashboard</a></li>
+                    <li class="mb-2"><a href="/users/profile" class="text-light text-decoration-none"><i class="fas fa-chevron-right me-2"></i>My Profile</a></li>
+                    {{else}}
+                    <li class="mb-2"><a href="/auth/login" class="text-light text-decoration-none"><i class="fas fa-chevron-right me-2"></i>Login</a></li>
+                    <li class="mb-2"><a href="/auth/register" class="text-light text-decoration-none"><i class="fas fa-chevron-right me-2"></i>Register</a></li>
+                    {{/if}}
+                </ul>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <h5 class="fw-bold mb-3">Contact Info</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <i class="fas fa-envelope me-2"></i>
+                        <a href="mailto:info@recipemanager.com" class="text-light text-decoration-none">info@recipemanager.com</a>
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-phone me-2"></i>
+                        <span class="text-light">(123) 456-7890</span>
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-map-marker-alt me-2"></i>
+                        <span class="text-light">123 Food Street, Kitchen City</span>
+                    </li>
+                </ul>
+                <div class="mt-4">
+                    <a href="/auth/github" class="btn btn-outline-light btn-sm">
+                        <i class="fab fa-github me-2"></i>Login with GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <hr class="bg-light my-4">
+        
+        <div class="row">
+            <div class="col-md-6">
+                <p class="mb-0 text-light">
+                    &copy; {{year}} Recipe Manager. All rights reserved.
+                </p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <a href="/about" class="text-light text-decoration-none me-3">About Us</a>
+                <a href="/contact" class="text-light text-decoration-none me-3">Contact</a>
+                <a href="#" class="text-light text-decoration-none">Privacy Policy</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Set current year in footer
+    document.addEventListener('DOMContentLoaded', function() {
+        const yearSpan = document.querySelector('footer p');
+        if (yearSpan) {
+            yearSpan.innerHTML = yearSpan.innerHTML.replace('{{year}}', new Date().getFullYear());
+        }
+    });
+</script>

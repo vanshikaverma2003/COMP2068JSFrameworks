@@ -1,0 +1,266 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <!-- Register Card -->
+            <div class="card shadow-lg border-0">
+                <!-- Card Header -->
+                <div class="card-header bg-success text-white text-center py-4">
+                    <h2 class="display-6 fw-bold mb-0">
+                        <i class="fas fa-user-plus me-2"></i>Join Our Community
+                    </h2>
+                    <p class="mb-0 mt-2">Create your free account and start sharing recipes</p>
+                </div>
+                
+                <!-- Card Body -->
+                <div class="card-body p-4 p-md-5">
+                    <!-- GitHub Signup Button -->
+                    <div class="text-center mb-4">
+                        <a href="/auth/github" class="btn btn-dark btn-lg w-100 py-3 mb-3">
+                            <i class="fab fa-github fa-lg me-3"></i>
+                            Sign up with GitHub
+                        </a>
+                        <div class="divider d-flex align-items-center my-4">
+                            <p class="text-center mx-3 mb-0 text-muted">Or register with email</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Error Messages -->
+                    {{#if errors}}
+                    <div class="alert alert-danger" role="alert">
+                        <i class="fas fa-exclamation-circle me-2"></i>
+                        <ul class="mb-0 ps-3">
+                            {{#each errors}}
+                            <li>{{this.msg}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    {{/if}}
+                    
+                    <!-- Register Form -->
+                    <form action="/auth/register" method="POST">
+                        <div class="row g-3 mb-3">
+                            <!-- Username -->
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" 
+                                           class="form-control {{#if errors}}is-invalid{{/if}}" 
+                                           id="username" 
+                                           name="username"
+                                           placeholder="johndoe"
+                                           value="{{username}}"
+                                           required>
+                                    <label for="username">
+                                        <i class="fas fa-user me-2"></i>Username
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- Display Name -->
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" 
+                                           class="form-control" 
+                                           id="displayName" 
+                                           name="displayName"
+                                           placeholder="John Doe"
+                                           value="{{displayName}}">
+                                    <label for="displayName">
+                                        <i class="fas fa-id-card me-2"></i>Display Name
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Email -->
+                        <div class="form-floating mb-3">
+                            <input type="email" 
+                                   class="form-control {{#if errors}}is-invalid{{/if}}" 
+                                   id="email" 
+                                   name="email"
+                                   placeholder="name@example.com"
+                                   value="{{email}}"
+                                   required>
+                            <label for="email">
+                                <i class="fas fa-envelope me-2"></i>Email Address
+                            </label>
+                        </div>
+                        
+                        <div class="row g-3 mb-4">
+                            <!-- Password -->
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="password" 
+                                           class="form-control {{#if errors}}is-invalid{{/if}}" 
+                                           id="password" 
+                                           name="password"
+                                           placeholder="Password"
+                                           required>
+                                    <label for="password">
+                                        <i class="fas fa-lock me-2"></i>Password
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- Confirm Password -->
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="password" 
+                                           class="form-control {{#if errors}}is-invalid{{/if}}" 
+                                           id="password2" 
+                                           name="password2"
+                                           placeholder="Confirm Password"
+                                           required>
+                                    <label for="password2">
+                                        <i class="fas fa-lock me-2"></i>Confirm Password
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Terms Agreement -->
+                        <div class="form-check mb-4">
+                            <input class="form-check-input" type="checkbox" id="terms" required>
+                            <label class="form-check-label" for="terms">
+                                I agree to the 
+                                <a href="#" class="text-success text-decoration-none">Terms of Service</a> 
+                                and 
+                                <a href="#" class="text-success text-decoration-none">Privacy Policy</a>
+                            </label>
+                        </div>
+                        
+                        <!-- Submit Button -->
+                        <div class="d-grid mb-4">
+                            <button type="submit" class="btn btn-success btn-lg py-3">
+                                <i class="fas fa-user-plus me-2"></i>Create Account
+                            </button>
+                        </div>
+                        
+                        <!-- Login Link -->
+                        <div class="text-center">
+                            <p class="text-muted mb-0">
+                                Already have an account?
+                                <a href="/auth/login" class="text-success fw-bold text-decoration-none">
+                                    Login here
+                                </a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Benefits Section -->
+            <div class="row mt-5 g-4">
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <div class="benefit-icon mb-3">
+                            <i class="fas fa-utensils fa-2x text-success"></i>
+                        </div>
+                        <h6 class="fw-bold">Unlimited Recipes</h6>
+                        <p class="text-muted small">Create and save as many recipes as you want</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <div class="benefit-icon mb-3">
+                            <i class="fas fa-users fa-2x text-success"></i>
+                        </div>
+                        <h6 class="fw-bold">Join Community</h6>
+                        <p class="text-muted small">Connect with other food enthusiasts</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <div class="benefit-icon mb-3">
+                            <i class="fas fa-mobile-alt fa-2x text-success"></i>
+                        </div>
+                        <h6 class="fw-bold">Access Anywhere</h6>
+                        <p class="text-muted small">Use on any device, anywhere</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Custom CSS for Register Page -->
+<style>
+    .card {
+        border-radius: 15px;
+        overflow: hidden;
+    }
+    
+    .card-header {
+        border-bottom: none;
+    }
+    
+    .divider {
+        color: #6c757d;
+    }
+    
+    .divider::before,
+    .divider::after {
+        content: "";
+        flex: 1;
+        border-bottom: 1px solid #dee2e6;
+    }
+    
+    .benefit-icon {
+        width: 60px;
+        height: 60px;
+        background-color: rgba(40, 167, 69, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+    }
+    
+    .form-floating > .form-control:focus ~ label,
+    .form-floating > .form-control:not(:placeholder-shown) ~ label {
+        color: #28a745;
+    }
+    
+    .alert ul {
+        margin-bottom: 0;
+    }
+    
+    .btn-dark {
+        background-color: #333;
+        border-color: #333;
+    }
+    
+    .btn-dark:hover {
+        background-color: #222;
+        border-color: #222;
+    }
+</style>
+
+<!-- Form Validation Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const password = document.getElementById('password');
+        const password2 = document.getElementById('password2');
+        const form = document.querySelector('form');
+        
+        function validatePassword() {
+            if (password.value !== password2.value) {
+                password2.setCustomValidity("Passwords don't match");
+                password2.classList.add('is-invalid');
+                return false;
+            } else {
+                password2.setCustomValidity('');
+                password2.classList.remove('is-invalid');
+                return true;
+            }
+        }
+        
+        password.onchange = validatePassword;
+        password2.onkeyup = validatePassword;
+        
+        form.addEventListener('submit', function(event) {
+            if (!validatePassword()) {
+                event.preventDefault();
+            }
+        });
+    });
+</script>

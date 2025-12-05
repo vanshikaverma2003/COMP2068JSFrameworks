@@ -1,0 +1,152 @@
+<!-- Search and Filter Section -->
+<div class="card mb-4 shadow-sm">
+    <div class="card-body">
+        <h1 class="h3 mb-4 text-success">Browse All Recipes</h1>
+        
+        <form action="/recipes/public" method="GET" class="row g-3">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-search"></i></span>
+                    <input type="text" class="form-control" name="search" placeholder="Search recipes by title, ingredients, or description..." value="{{search}}">
+                </div>
+            </div>
+            
+            <div class="col-md-3">
+                <select class="form-select" name="category">
+                    <option value="All">All Categories</option>
+                    {{#each categories}}
+                    <option value="{{this}}" {{#if (eq this ../category)}}selected{{/if}}>{{this}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            
+            <div class="col-md-3">
+                <select class="form-select" name="difficulty">
+                    <option value="All">All Difficulties</option>
+                    {{#each difficulties}}
+                    <option value="{{this}}" {{#if (eq this ../difficulty)}}selected{{/if}}>{{this}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            
+            <div class="col-12">
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-filter me-2"></i>Apply Filters
+                    </button>
+                    <a href="/recipes/public" class="btn btn-outline-secondary">
+                        <i class="fas fa-times me-2"></i>Clear Filters
+                    </a>
+                </div>
+            </div>
+        </form>
+        
+        {{#if search}}
+        <div class="mt-3">
+            <p class="mb-0">Showing results for: <strong>"{{search}}"</strong></p>
+        </div>
+        {{/if}}
+    </div>
+</div>
+
+<!-- Recipe Count -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="h4 mb-0">
+        {{#if recipes.length}}
+        {{recipes.length}} recipe{{#if (gt recipes.length 1)}}s{{/if}} found
+        {{else}}
+        No recipes found
+        {{/if}}
+    </h2>
+    {{#if user}}
+    <a href="/recipes/add/new" class="btn btn-success">
+        <i class="fas fa-plus me-2"></i>Add New Recipe
+    </a>
+    {{/if}}
+</div>
+
+<!-- Recipes Grid -->
+{{#if recipes.length}}
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    {{#each recipes}}
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            <div class="position-relative">
+                <img src="{{this.imageUrl}}" class="card-img-top" alt="{{this.title}}" style="height: 200px; object-fit: cover;" onerror="this.src='/images/recipe-default.jpg'">
+                <div class="position-absolute top-0 start-0 m-2">
+                    <span class="badge bg-success">{{this.category}}</span>
+                    <span class="badge bg-warning text-dark">{{this.difficulty}}</span>
+                </div>
+            </div>
+            
+            <div class="card-body">
+                <h5 class="card-title">{{this.title}}</h5>
+                <p class="card-text text-muted">{{truncate this.description 100}}</p>
+                
+                <div class="mb-3">
+                    <small class="text-muted">
+                        <i class="fas fa-clock me-1"></i> {{this.cookingTime}} min
+                        <i class="fas fa-list-ul ms-3 me-1"></i> {{this.ingredientCount}} ingredients
+                        <i class="fas fa-eye ms-3 me-1"></i> {{this.views}} views
+                    </small>
+                </div>
+                
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <img src="{{this.createdBy.avatar}}" alt="{{this.createdBy.displayName}}" class="rounded-circle me-2" width="30" height="30" onerror="this.src='/images/default-avatar.png'">
+                        <small class="text-muted">{{this.createdBy.displayName}}</small>
+                    </div>
+                    <a href="/recipes/{{this._id}}" class="btn btn-sm btn-outline-success">
+                        View Recipe <i class="fas fa-arrow-right ms-1"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="card-footer bg-transparent">
+                <small class="text-muted">
+                    <i class="fas fa-calendar me-1"></i> {{formatDate this.createdAt}}
+                </small>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</div>
+{{else}}
+<!-- No Recipes Found -->
+<div class="text-center py-5 my-5">
+    <i class="fas fa-utensils fa-4x text-muted mb-3"></i>
+    <h3 class="text-muted mb-3">No Recipes Found</h3>
+    <p class="text-muted mb-4">Try adjusting your search or filter to find what you're looking for.</p>
+    <div class="d-flex justify-content-center gap-3">
+        <a href="/recipes/public" class="btn btn-outline-success">
+            <i class="fas fa-times me-2"></i>Clear Search
+        </a>
+        {{#if user}}
+        <a href="/recipes/add/new" class="btn btn-success">
+            <i class="fas fa-plus me-2"></i>Add First Recipe
+        </a>
+        {{else}}
+        <a href="/auth/register" class="btn btn-success">
+            <i class="fas fa-user-plus me-2"></i>Join to Add Recipes
+        </a>
+        {{/if}}
+    </div>
+</div>
+{{/if}}
+
+<!-- Search Tips -->
+{{#if recipes.length}}
+<div class="card mt-5 bg-light border-0">
+    <div class="card-body">
+        <h5 class="card-title text-success">
+            <i class="fas fa-lightbulb me-2"></i>Search Tips
+        </h5>
+        <ul class="list-unstyled mb-0">
+            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Try searching by ingredient names (e.g., "chicken", "tomato")</li>
+            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Use specific categories for better results</li>
+            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Filter by difficulty level to match your cooking skills</li>
+            <li><i class="fas fa-check-circle text-success me-2"></i>Combine multiple filters for precise results</li>
+        </ul>
+    </div>
+</div>
+{{/if}}

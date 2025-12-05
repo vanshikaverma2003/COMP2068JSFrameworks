@@ -1,0 +1,232 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb" class="mb-4">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/recipes/dashboard">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="/recipes/{{recipe._id}}">{{recipe.title}}</a></li>
+                    <li class="breadcrumb-item active">Edit Recipe</li>
+                </ol>
+            </nav>
+            
+            <!-- Form Header -->
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body text-center">
+                    <h1 class="display-6 fw-bold text-success mb-3">
+                        <i class="fas fa-edit me-2"></i>Edit Recipe
+                    </h1>
+                    <p class="lead text-muted">Update your recipe information</p>
+                </div>
+            </div>
+            
+            <!-- Recipe Form -->
+            <form action="/recipes/{{recipe._id}}?_method=PUT" method="POST" class="needs-validation" novalidate>
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-success text-white">
+                        <h4 class="mb-0"><i class="fas fa-info-circle me-2"></i>Basic Information</h4>
+                    </div>
+                    <div class="card-body">
+                        <!-- Title -->
+                        <div class="mb-3">
+                            <label for="title" class="form-label fw-bold">
+                                <i class="fas fa-heading me-2"></i>Recipe Title *
+                            </label>
+                            <input type="text" class="form-control form-control-lg" 
+                                   id="title" name="title" 
+                                   value="{{recipe.title}}"
+                                   placeholder="e.g., Classic Chocolate Chip Cookies" required>
+                            <div class="invalid-feedback">Please enter a recipe title.</div>
+                        </div>
+                        
+                        <!-- Description -->
+                        <div class="mb-3">
+                            <label for="description" class="form-label fw-bold">
+                                <i class="fas fa-align-left me-2"></i>Description *
+                            </label>
+                            <textarea class="form-control" id="description" name="description" 
+                                      rows="3" placeholder="Describe your recipe..." required>{{recipe.description}}</textarea>
+                            <div class="invalid-feedback">Please enter a description.</div>
+                        </div>
+                        
+                        <!-- Category and Difficulty -->
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="category" class="form-label fw-bold">
+                                    <i class="fas fa-tag me-2"></i>Category *
+                                </label>
+                                <select class="form-select" id="category" name="category" required>
+                                    <option value="">Select a category</option>
+                                    {{#each categories}}
+                                    <option value="{{this}}" {{#if (eq this ../recipe.category)}}selected{{/if}}>
+                                        {{this}}
+                                    </option>
+                                    {{/each}}
+                                </select>
+                                <div class="invalid-feedback">Please select a category.</div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label for="difficulty" class="form-label fw-bold">
+                                    <i class="fas fa-chart-bar me-2"></i>Difficulty Level *
+                                </label>
+                                <select class="form-select" id="difficulty" name="difficulty" required>
+                                    <option value="">Select difficulty</option>
+                                    {{#each difficulties}}
+                                    <option value="{{this}}" {{#if (eq this ../recipe.difficulty)}}selected{{/if}}>
+                                        {{this}}
+                                    </option>
+                                    {{/each}}
+                                </select>
+                                <div class="invalid-feedback">Please select a difficulty level.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ingredients Card -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-success text-white">
+                        <h4 class="mb-0">
+                            <i class="fas fa-list-ul me-2"></i>Ingredients *
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="ingredients" class="form-label fw-bold">
+                                <i class="fas fa-shopping-basket me-2"></i>Ingredients List
+                            </label>
+                            <textarea class="form-control font-monospace" 
+                                      id="ingredients" name="ingredients" 
+                                      rows="6" required>{{#each recipe.ingredients}}{{this}}
+{{/each}}</textarea>
+                            <div class="invalid-feedback">Please add at least one ingredient.</div>
+                            <div class="form-text">Enter each ingredient on a new line.</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Instructions Card -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-success text-white">
+                        <h4 class="mb-0">
+                            <i class="fas fa-clipboard-list me-2"></i>Instructions *
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="instructions" class="form-label fw-bold">
+                                <i class="fas fa-list-ol me-2"></i>Step-by-Step Instructions
+                            </label>
+                            <textarea class="form-control font-monospace" 
+                                      id="instructions" name="instructions" 
+                                      rows="8" required>{{#each recipe.instructions}}{{this}}
+{{/each}}</textarea>
+                            <div class="invalid-feedback">Please add cooking instructions.</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cooking Info Card -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-success text-white">
+                        <h4 class="mb-0"><i class="fas fa-clock me-2"></i>Cooking Information</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="cookingTime" class="form-label fw-bold">
+                                    <i class="fas fa-hourglass-half me-2"></i>Cooking Time (minutes) *
+                                </label>
+                                <input type="number" class="form-control" 
+                                       id="cookingTime" name="cookingTime" 
+                                       value="{{recipe.cookingTime}}"
+                                       min="1" max="1000" step="1" required>
+                                <div class="invalid-feedback">Please enter cooking time in minutes.</div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">
+                                    <i class="fas fa-image me-2"></i>Recipe Image URL
+                                </label>
+                                <input type="text" class="form-control" 
+                                       id="imageUrl" name="imageUrl"
+                                       value="{{recipe.imageUrl}}"
+                                       placeholder="Optional: Image URL">
+                                <div class="form-text">Leave empty to use default image.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Form Actions -->
+                <div class="card shadow-sm mb-5">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <a href="/recipes/{{recipe._id}}" class="btn btn-outline-secondary btn-lg">
+                                <i class="fas fa-times me-2"></i>Cancel
+                            </a>
+                            <div class="btn-group">
+                                <button type="submit" class="btn btn-success btn-lg">
+                                    <i class="fas fa-save me-2"></i>Update Recipe
+                                </button>
+                                <button type="button" class="btn btn-danger btn-lg" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#deleteModal">
+                                    <i class="fas fa-trash me-2"></i>Delete
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            
+            <!-- Delete Modal -->
+            <div class="modal fade" id="deleteModal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-danger">
+                                <i class="fas fa-exclamation-triangle me-2"></i>Delete Recipe
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure you want to delete "<strong>{{recipe.title}}</strong>"?</p>
+                            <p class="text-danger"><small>This action cannot be undone.</small></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <form action="/recipes/{{recipe._id}}?_method=DELETE" method="POST">
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="fas fa-trash me-2"></i>Delete Recipe
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Form Validation Script -->
+            <script>
+                (function () {
+                    'use strict'
+                    
+                    const forms = document.querySelectorAll('.needs-validation')
+                    
+                    Array.from(forms).forEach(form => {
+                        form.addEventListener('submit', event => {
+                            if (!form.checkValidity()) {
+                                event.preventDefault()
+                                event.stopPropagation()
+                            }
+                            
+                            form.classList.add('was-validated')
+                        }, false)
+                    })
+                })()
+            </script>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,283 @@
+<!-- Dashboard Header -->
+<div class="dashboard-header mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="display-6 fw-bold text-success">
+                <i class="fas fa-tachometer-alt me-2"></i>My Dashboard
+            </h1>
+            <p class="lead text-muted">Welcome back, {{user.displayName}}! Manage your recipes here.</p>
+        </div>
+        <a href="/recipes/add/new" class="btn btn-success btn-lg">
+            <i class="fas fa-plus me-2"></i>Add New Recipe
+        </a>
+    </div>
+    
+    <!-- Stats Cards -->
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="card text-center border-success shadow-sm h-100">
+                <div class="card-body">
+                    <i class="fas fa-utensils fa-3x text-success mb-3"></i>
+                    <h2 class="display-4 fw-bold text-success">{{stats.total}}</h2>
+                    <h5 class="card-title">Total Recipes</h5>
+                    <p class="card-text text-muted">All your recipes</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card text-center border-success shadow-sm h-100">
+                <div class="card-body">
+                    <i class="fas fa-globe fa-3x text-success mb-3"></i>
+                    <h2 class="display-4 fw-bold text-success">{{stats.public}}</h2>
+                    <h5 class="card-title">Public Recipes</h5>
+                    <p class="card-text text-muted">Visible to everyone</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card text-center border-success shadow-sm h-100">
+                <div class="card-body">
+                    <i class="fas fa-lock fa-3x text-success mb-3"></i>
+                    <h2 class="display-4 fw-bold text-success">{{stats.private}}</h2>
+                    <h5 class="card-title">Private Recipes</h5>
+                    <p class="card-text text-muted">Only visible to you</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="card mb-5 shadow-sm">
+    <div class="card-header bg-success text-white">
+        <h4 class="mb-0"><i class="fas fa-bolt me-2"></i>Quick Actions</h4>
+    </div>
+    <div class="card-body">
+        <div class="row g-3">
+            <div class="col-md-3">
+                <a href="/recipes/add/new" class="btn btn-outline-success w-100 h-100 py-3">
+                    <i class="fas fa-plus fa-2x mb-2"></i><br>
+                    Add Recipe
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="/users/profile" class="btn btn-outline-success w-100 h-100 py-3">
+                    <i class="fas fa-user fa-2x mb-2"></i><br>
+                    Edit Profile
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="/recipes/public" class="btn btn-outline-success w-100 h-100 py-3">
+                    <i class="fas fa-search fa-2x mb-2"></i><br>
+                    Browse Recipes
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="/auth/logout" class="btn btn-outline-danger w-100 h-100 py-3">
+                    <i class="fas fa-sign-out-alt fa-2x mb-2"></i><br>
+                    Logout
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- My Recipes Section -->
+<div class="my-recipes-section">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-success">
+            <i class="fas fa-book me-2"></i>My Recipes
+        </h2>
+        <div class="btn-group">
+            <button class="btn btn-outline-success active" data-filter="all">All</button>
+            <button class="btn btn-outline-success" data-filter="public">Public</button>
+            <button class="btn btn-outline-success" data-filter="private">Private</button>
+        </div>
+    </div>
+    
+    {{#if recipes.length}}
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead class="table-success">
+                <tr>
+                    <th>Recipe</th>
+                    <th>Category</th>
+                    <th>Difficulty</th>
+                    <th>Time</th>
+                    <th>Views</th>
+                    <th>Created</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each recipes}}
+                <tr data-visibility="{{#if this.isPublic}}public{{else}}private{{/if}}">
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img src="{{this.imageUrl}}" alt="{{this.title}}" class="rounded me-3" width="50" height="50" style="object-fit: cover;" onerror="this.src='/images/recipe-default.jpg'">
+                            <div>
+                                <strong>{{this.title}}</strong><br>
+                                <small class="text-muted">{{truncate this.description 50}}</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="badge bg-success">{{this.category}}</span>
+                    </td>
+                    <td>
+                        <span class="badge bg-warning text-dark">{{this.difficulty}}</span>
+                    </td>
+                    <td>
+                        <i class="fas fa-clock text-muted me-1"></i>
+                        {{this.cookingTime}} min
+                    </td>
+                    <td>
+                        <i class="fas fa-eye text-muted me-1"></i>
+                        {{this.views}}
+                    </td>
+                    <td>
+                        <small class="text-muted">{{formatDate this.createdAt}}</small>
+                    </td>
+                    <td>
+                        <div class="btn-group btn-group-sm">
+                            <a href="/recipes/{{this._id}}" class="btn btn-outline-success" title="View">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a href="/recipes/{{this._id}}/edit" class="btn btn-outline-primary" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <button type="button" class="btn btn-outline-danger" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#deleteModal{{@index}}"
+                                    title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                        
+                        <!-- Delete Modal for this recipe -->
+                        <div class="modal fade" id="deleteModal{{@index}}" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-danger">
+                                            <i class="fas fa-exclamation-triangle me-2"></i>Delete Recipe
+                                        </h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Are you sure you want to delete "<strong>{{this.title}}</strong>"?</p>
+                                        <p class="text-danger"><small>This action cannot be undone.</small></p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <form action="/recipes/{{this._id}}?_method=DELETE" method="POST">
+                                            <button type="submit" class="btn btn-danger">
+                                                <i class="fas fa-trash me-2"></i>Delete
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+    
+    {{#if (gt recipes.length 10)}}
+    <nav aria-label="Recipe pagination" class="mt-4">
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1">Previous</a>
+            </li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+            </li>
+        </ul>
+    </nav>
+    {{/if}}
+    
+    {{else}}
+    <!-- Empty State -->
+    <div class="text-center py-5 my-5 bg-light rounded">
+        <i class="fas fa-utensils fa-4x text-muted mb-3"></i>
+        <h3 class="text-muted mb-3">No Recipes Yet</h3>
+        <p class="text-muted mb-4">You haven't created any recipes yet. Start sharing your culinary creations!</p>
+        <a href="/recipes/add/new" class="btn btn-success btn-lg">
+            <i class="fas fa-plus me-2"></i>Create Your First Recipe
+        </a>
+    </div>
+    {{/if}}
+</div>
+
+<!-- Recent Activity -->
+<div class="card mt-5 shadow-sm">
+    <div class="card-header bg-success text-white">
+        <h4 class="mb-0"><i class="fas fa-history me-2"></i>Recent Activity</h4>
+    </div>
+    <div class="card-body">
+        <ul class="list-group list-group-flush">
+            {{#if recipes.length}}
+                {{#each recipes}}
+                    {{#if @first}}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <i class="fas fa-plus-circle text-success me-2"></i>
+                            Added "{{this.title}}"
+                        </div>
+                        <small class="text-muted">{{formatDate this.createdAt}}</small>
+                    </li>
+                    {{/if}}
+                    {{#if (eq @index 1)}}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <i class="fas fa-edit text-primary me-2"></i>
+                            Updated "{{this.title}}"
+                        </div>
+                        <small class="text-muted">{{formatDate this.updatedAt}}</small>
+                    </li>
+                    {{/if}}
+                {{/each}}
+            {{else}}
+            <li class="list-group-item text-center text-muted py-4">
+                <i class="fas fa-info-circle me-2"></i>
+                No recent activity
+            </li>
+            {{/if}}
+        </ul>
+    </div>
+</div>
+
+<script>
+    // Filter recipes by visibility
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterButtons = document.querySelectorAll('[data-filter]');
+        const recipeRows = document.querySelectorAll('tbody tr[data-visibility]');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Update active button
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                const filter = this.dataset.filter;
+                
+                // Show/hide rows
+                recipeRows.forEach(row => {
+                    if (filter === 'all' || row.dataset.visibility === filter) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+        });
+    });
+</script>

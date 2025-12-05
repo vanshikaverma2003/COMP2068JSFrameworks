@@ -1,0 +1,148 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6 text-center">
+            <!-- GitHub Login Card -->
+            <div class="card shadow-lg border-0">
+                <div class="card-body p-5">
+                    <!-- GitHub Icon -->
+                    <div class="mb-4">
+                        <div class="github-icon mx-auto mb-3">
+                            <i class="fab fa-github fa-4x"></i>
+                        </div>
+                        <h2 class="fw-bold text-success">Login with GitHub</h2>
+                        <p class="text-muted">Connect your GitHub account to Recipe Manager</p>
+                    </div>
+                    
+                    <!-- Benefits List -->
+                    <div class="text-start mb-4">
+                        <h5 class="mb-3">Benefits of GitHub login:</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-3">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <strong>Quick registration</strong> - No need to create a new password
+                            </li>
+                            <li class="mb-3">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <strong>Enhanced security</strong> - GitHub's secure authentication
+                            </li>
+                            <li class="mb-3">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <strong>Automatic profile</strong> - Use your GitHub avatar and info
+                            </li>
+                            <li class="mb-3">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <strong>One-click login</strong> - Access your account instantly
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- GitHub Login Button -->
+                    <div class="d-grid mb-4">
+                        <a href="/auth/github" class="btn btn-dark btn-lg py-3">
+                            <i class="fab fa-github fa-lg me-3"></i>
+                            Continue to GitHub
+                        </a>
+                    </div>
+                    
+                    <!-- Alternative Options -->
+                    <div class="divider d-flex align-items-center my-4">
+                        <p class="text-center mx-3 mb-0 text-muted">Or use another method</p>
+                    </div>
+                    
+                    <div class="d-grid gap-3">
+                        <a href="/auth/login" class="btn btn-outline-success btn-lg">
+                            <i class="fas fa-envelope me-2"></i>
+                            Login with Email
+                        </a>
+                        <a href="/auth/register" class="btn btn-success btn-lg">
+                            <i class="fas fa-user-plus me-2"></i>
+                            Create New Account
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Information Cards -->
+            <div class="row mt-5 g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 border-success">
+                        <div class="card-body text-center">
+                            <i class="fas fa-shield-alt fa-2x text-success mb-3"></i>
+                            <h6 class="card-title fw-bold">Secure Login</h6>
+                            <p class="card-text small text-muted">Your GitHub credentials are never shared with us</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-success">
+                        <div class="card-body text-center">
+                            <i class="fas fa-sync-alt fa-2x text-success mb-3"></i>
+                            <h6 class="card-title fw-bold">Easy Sync</h6>
+                            <p class="card-text small text-muted">Sync your profile with GitHub updates</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-success">
+                        <div class="card-body text-center">
+                            <i class="fas fa-user-check fa-2x text-success mb-3"></i>
+                            <h6 class="card-title fw-bold">Verified Account</h6>
+                            <p class="card-text small text-muted">GitHub verification adds credibility</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Custom CSS -->
+<style>
+    .card {
+        border-radius: 15px;
+        overflow: hidden;
+    }
+    
+    .github-icon {
+        width: 100px;
+        height: 100px;
+        background-color: #333;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+    }
+    
+    .github-icon i {
+        color: white;
+    }
+    
+    .divider {
+        color: #6c757d;
+    }
+    
+    .divider::before,
+    .divider::after {
+        content: "";
+        flex: 1;
+        border-bottom: 1px solid #dee2e6;
+    }
+    
+    .btn-dark {
+        background-color: #333;
+        border-color: #333;
+        transition: all 0.3s;
+    }
+    
+    .btn-dark:hover {
+        background-color: #24292e;
+        border-color: #24292e;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .list-unstyled li {
+        padding-left: 0;
+    }
+</style>

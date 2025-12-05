@@ -1,0 +1,179 @@
+<!-- Hero Section -->
+<!-- Hero Section -->
+<section class="hero-section text-center py-5 mb-5" style="
+    background: linear-gradient(135deg, #28a745, #218838);
+    color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+">
+    <div class="container">
+        <h1 class="display-4 fw-bold mb-3 text-white">Welcome to Recipe Manager</h1>
+        <p class="lead mb-4 text-light">Discover, create, and share amazing recipes with food lovers around the world!</p>
+        
+        {{#unless user}}
+        <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
+            <a href="/auth/register" class="btn btn-light btn-lg px-4 text-success fw-bold">
+                <i class="fas fa-user-plus me-2"></i>Join Our Community
+            </a>
+            <a href="/recipes/public" class="btn btn-outline-light btn-lg px-4">
+                <i class="fas fa-book-open me-2"></i>Browse Recipes
+            </a>
+            <a href="/auth/github" class="btn btn-dark btn-lg px-4">
+                <i class="fab fa-github me-2"></i>Login with GitHub
+            </a>
+        </div>
+        {{/unless}}
+    </div>
+</section>
+
+<!-- Features -->
+<section class="features-section mb-5">
+    <div class="container">
+        <h2 class="text-center mb-4 text-success">Why Choose Recipe Manager?</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 border-success text-center p-4">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-share-alt fa-3x text-success"></i>
+                    </div>
+                    <h4 class="card-title">Share & Discover</h4>
+                    <p class="card-text">Share your culinary creations and discover amazing recipes from our community of food enthusiasts.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-success text-center p-4">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-search fa-3x text-success"></i>
+                    </div>
+                    <h4 class="card-title">Smart Search</h4>
+                    <p class="card-text">Find recipes by ingredients, categories, difficulty level, or cooking time with our advanced search.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-success text-center p-4">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-mobile-alt fa-3x text-success"></i>
+                    </div>
+                    <h4 class="card-title">Mobile Friendly</h4>
+                    <p class="card-text">Access your recipes anywhere, anytime with our fully responsive design that works on all devices.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Recent Recipes -->
+<section class="recent-recipes mb-5">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-success">Recently Added Recipes</h2>
+            <a href="/recipes/public" class="btn btn-outline-success">View All</a>
+        </div>
+        
+        {{#if recentRecipes.length}}
+        <div class="row g-4">
+            {{#each recentRecipes}}
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-img-top position-relative">
+                        <img src="{{this.imageUrl}}" class="card-img-top" alt="{{this.title}}" style="height: 200px; object-fit: cover;" onerror="this.src='/images/recipe-default.jpg'">
+                        <span class="badge bg-success position-absolute top-0 end-0 m-2">{{this.category}}</span>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.title}}</h5>
+                        <p class="card-text text-muted">{{truncate this.description 80}}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted">
+                                <i class="fas fa-clock me-1"></i> {{this.cookingTime}} min
+                                <i class="fas fa-chart-bar ms-3 me-1"></i> {{this.difficulty}}
+                            </small>
+                            <a href="/recipes/{{this._id}}" class="btn btn-sm btn-success">View Recipe</a>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <div class="d-flex align-items-center">
+                            <img src="{{this.createdBy.avatar}}" alt="{{this.createdBy.displayName}}" class="rounded-circle me-2" width="24" height="24" onerror="this.src='/images/default-avatar.png'">
+                            <small class="text-muted">By {{this.createdBy.displayName}}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        {{else}}
+        <div class="text-center py-5">
+            <i class="fas fa-utensils fa-4x text-muted mb-3"></i>
+            <h4 class="text-muted">No recipes yet</h4>
+            <p class="text-muted">Be the first to share a recipe!</p>
+            {{#if user}}
+            <a href="/recipes/add/new" class="btn btn-success">Add Your First Recipe</a>
+            {{else}}
+            <a href="/auth/register" class="btn btn-success">Join to Add Recipes</a>
+            {{/if}}
+        </div>
+        {{/if}}
+    </div>
+</section>
+
+<!-- Popular Recipes -->
+<section class="popular-recipes mb-5">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-success">Most Popular Recipes</h2>
+            <a href="/recipes/public?sort=popular" class="btn btn-outline-success">View More</a>
+        </div>
+        
+        {{#if popularRecipes.length}}
+        <div class="row g-4">
+            {{#each popularRecipes}}
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="{{this.imageUrl}}" class="img-fluid rounded-start h-100" alt="{{this.title}}" style="object-fit: cover;" onerror="this.src='/images/recipe-default.jpg'">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{this.title}}</h5>
+                                <p class="card-text text-muted small">{{truncate this.description 100}}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="badge bg-success me-2">{{this.category}}</span>
+                                        <small class="text-muted">
+                                            <i class="fas fa-eye me-1"></i> {{this.views}} views
+                                        </small>
+                                    </div>
+                                    <a href="/recipes/{{this._id}}" class="btn btn-sm btn-outline-success">View</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        {{else}}
+        <div class="text-center py-3">
+            <p class="text-muted">No popular recipes yet</p>
+        </div>
+        {{/if}}
+    </div>
+</section>
+
+<!-- Call to Action -->
+{{#unless user}}
+<section class="cta-section py-5 bg-success text-white rounded shadow">
+    <div class="container text-center">
+        <h2 class="mb-3">Ready to Join Our Community?</h2>
+        <p class="mb-4">Sign up today and start sharing your favorite recipes with food lovers everywhere!</p>
+        <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
+            <a href="/auth/register" class="btn btn-light btn-lg">
+                <i class="fas fa-user-plus me-2"></i>Create Free Account
+            </a>
+            <a href="/auth/github" class="btn btn-dark btn-lg">
+                <i class="fab fa-github me-2"></i>Sign in with GitHub
+            </a>
+        </div>
+    </div>
+</section>
+{{/unless}}
